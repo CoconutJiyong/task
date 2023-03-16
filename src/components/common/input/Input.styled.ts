@@ -1,17 +1,20 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 export const EmotionInput = styled.input`
-  width: 100%;
-  padding: 10px 5px;
-  border: none;
+  ${({ theme }) => css`
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
 
-  border-bottom: 2px solid #9f9f9f;
+    border-bottom: 2px solid ${theme.colors.gray30};
 
-  :focus {
-    outline: none;
-  }
+    :focus {
+      outline: none;
+    }
 
-  &::placeholder {
-    color: #9f9f9f;
-  }
+    &::placeholder {
+      color: ${theme.colors.gray30};
+    }
+  `}
 `;

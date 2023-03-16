@@ -1,12 +1,13 @@
 import React, { useState, KeyboardEvent } from "react";
+import { v4 as uuidCreate } from "uuid";
 
 interface tagTypes {
   title: string;
-  index: number;
+  uuid: string;
 }
 
 export const useOutputHooks = () => {
-  const [tagItems, setTagItems] = useState<string[]>([]);
+  const [tagItems, setTagItems] = useState<tagTypes[]>([]);
   const [input, setInput] = useState<string>("");
 
   const handleInputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,18 +19,23 @@ export const useOutputHooks = () => {
       if (event.target) {
         setTagItems((pre) => [
           ...pre,
-          (event.target as HTMLInputElement).value,
+          {
+            title: (event.target as HTMLInputElement).value,
+            uuid: uuidCreate(),
+          },
         ]);
       }
     }
   };
 
   const handleInputTags = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTagItems((pre) => [...pre, event.target.value]);
+    setTagItems((pre) => [
+      ...pre,
+      { title: event.target.value, uuid: uuidCreate() },
+    ]);
   };
-
-  const handleRemoveTags = (tag: string) => {
-    const removeTags = tagItems.filter((tagItem) => tagItem !== tag);
+  const handleRemoveTags = (uuid: string) => {
+    const removeTags = tagItems.filter((tagItem) => tagItem.uuid !== uuid);
     setTagItems(() => [...removeTags]);
   };
 

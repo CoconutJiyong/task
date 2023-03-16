@@ -59,11 +59,11 @@ const MainContainer = () => {
               <S.BodyTd>
                 <S.TagWrapper>
                   {tagItems &&
-                    tagItems.map((tag, index) => {
+                    tagItems.map((tag) => {
                       return (
-                        <S.TagItem key={tag + index}>
-                          {tag}
-                          <span onClick={() => onRemoveTags(tag)}>X</span>
+                        <S.TagItem key={tag.uuid}>
+                          {tag.title}
+                          <span onClick={() => onRemoveTags(tag.uuid)}>X</span>
                         </S.TagItem>
                       );
                     })}
